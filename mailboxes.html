@@ -1,0 +1,33 @@
+    <div class="container-fluid">
+    <header class="row btmspace">
+  <div class="logo col-sm-2">
+    <h5>Почтовые ящики</h5>
+  </div>
+  <div class="search-bar col-sm-5">
+    <div class="input-group">
+      <input class="form-control" placeholder="Поиск..." type="text" ng-model="searchstr">
+      <span class="input-group-btn">
+        <button class="btn btn-main">
+          <span class="glyphicon glyphicon-search"></span>
+        </button>
+      </span>
+    </div><!-- /input-group -->
+    <span class="arrow caret"></span>
+  </div><!-- search-bar -->
+  <div class="col-sm-3">
+  </div>
+  <div class="col-sm-1">
+  </div>
+  <div class="col-sm-1"><logout></logout></div>
+</header>
+      <!-- control-bar -->
+      <div class="mail row">
+        <!-- sidebar -->
+        <div class="inbox col-sm-12">
+          <ul class="list-unstyled" ng-repeat="box in $ctrl.mailboxes | filter:searchstr">
+        <mailbox mailbox="box">
+        </mailbox>          
+          </ul>
+        </div><!-- inbox -->
+      </div><!-- mail -->
+    </div>

@@ -1,0 +1,24 @@
+            <li class="email-item row unread">
+              <div class="people col-sm-12">
+                <ul class="mail-icons list-inline">
+                  <!--li>
+                    <input type="checkbox" class="mail-select" ng-model="$ctrl.person.checked">
+                  </li-->
+                  <li>
+                    <span class="glyphicon glyphicon-star-empty"></span>
+                  </li>
+                  <li>
+                    <span class="glyphicon glyphicon-pencil" style="cursor:pointer" ui-sref="user({userId: $ctrl.person.id})"></span>
+                  </li>
+                  <li>
+                  	<span ng-click="$ctrl.deleteItem({item: $ctrl.person});" class="glyphicon glyphicon-remove" style="color:red;cursor:pointer;"></span>
+                  </li>
+                </ul>
+
+              	<!--a ui-sref="user({userId: $ctrl.person.id})"-->
+                	<span ui-sref="user({userId: $ctrl.person.id})" class="people-names" style="cursor:pointer">{{$ctrl.person.surname}} {{$ctrl.person.firstName}}</span>
+                <!--/a-->
+                <!--button ng-click="$ctrl.deleteItem({item: $ctrl.person});" class="btn btn-default btn-xs"></button-->
+              </div><!-- people -->
+              <!-- message -->
+            </li>

@@ -1,0 +1,64 @@
+<div class="container-fluid">
+  <header class="row">
+    <div class="logo col-sm-4 poi" ng-click="$ctrl.out()">
+      <button class="btn" title="К списку писем">
+      <span class="glyphicon glyphicon-arrow-left"></span>
+      </button>
+      <span>Вернуться к списку писем</span>
+    </div>
+    <div class="search-bar col-sm-3"></div>
+    <div class="profile col-sm-3 text-right">
+      <ul class="profile-icons list-inline pull-right">
+        <li>{{$ctrl.email}}</li>
+        <li>
+          <img class="poi" title="Адресная книга" src="./img/addressbook.png" ui-sref="cards">
+        </li>
+        <li>
+          <span class="glyphicon glyphicon-th"></span>
+        </li>
+        <li class="bell">
+          <span class="glyphicon glyphicon-bell"></span>
+        </li>
+        <li>
+          <img src="./img/profile.jpg" class="img-circle">
+        </li>
+      </ul>
+    </div>
+    <!--div class="col-sm-3">
+    </div-->
+    <div class="col-sm-1 text-right">
+      <div role="button" class="XHsn7e" ui-sref="newletter({from: $ctrl.email})" title="Новое письмо">
+        <content class="Ip8zfc">
+          <div class="iYm0K"></div>
+        </content>
+      </div>
+    </div>
+    <div class="col-sm-1 pull-right"><logout></logout></div>
+  </header>
+  <div class="mail row">
+    <div class="inbox col-sm-12">
+    </div>
+  </div>
+  <div class="panel-heading">
+    <div class="panel-title">
+      <div class="row">
+        <div class="col-xs-12">
+          {{$ctrl.letter.subject}} &nbsp;&nbsp;&nbsp;
+          <button title="Удалить письмо"  ng-click="$ctrl.delete($ctrl.letter);">
+            <span class="glyphicon glyphicon-trash"></span>
+          </button>
+        </div>
+      <small>
+        <div class="col-xs-8">{{$ctrl.letter.from}}</div>
+        <div class="col-xs-2 text-right">{{$ctrl.letter.received | date:"dd.MM.yyyy hh:mm:ss"}}</div>
+        <div class="col-xs-2 text-right">{{$ctrl.letter.received | datefilter}}</div>
+      </small>
+      </div>
+    </div>
+  </div>
+  <div class="panel-body">
+    <div class=" col-md-12 col-lg-12 ">
+      <div class="">{{$ctrl.letter.content}}</div>
+    </div>
+  </div>
+</div>

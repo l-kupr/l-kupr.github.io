@@ -1,0 +1,87 @@
+<div class="container-fluid">
+  <header class="row">
+    <div class="logo col-sm-2">
+      <button class="btn" title="К списку почтовых ящиков" ng-click="$ctrl.out();">
+      <span class="glyphicon glyphicon-arrow-left" ></span>
+      </button>
+      <span>Письма</span>
+    </div>
+    <div class="search-bar col-sm-5">
+      <div class="input-group">
+        <input class="form-control" placeholder="Поиск..." type="text" ng-model="searchstr">
+        <span class="input-group-btn">
+          <button class="btn btn-main">
+            <span class="glyphicon glyphicon-search"></span>
+          </button>
+        </span>
+      </div><!-- /input-group -->
+      <span class="arrow caret"></span>
+    </div><!-- search-bar -->
+
+    <div class="profile col-sm-3 text-right">
+      <ul class="profile-icons list-inline pull-right">
+        <li>{{$ctrl.email}}</li>
+        <li>
+          <img class="poi" title="Адресная книга" src="./img/addressbook.png" ui-sref="cards">
+        </li>
+        <li>
+          <span class="glyphicon glyphicon-th"></span>
+        </li>
+        <li class="bell">
+          <span class="glyphicon glyphicon-bell"></span>
+        </li>
+        <li>
+          <img src="./img/profile.jpg" class="img-circle">
+        </li>
+      </ul>
+    </div>
+
+    <!--div class="col-sm-3">
+    </div-->
+    <div class="col-sm-1 text-right">
+      <div role="button" class="XHsn7e" ui-sref="newletter({from: $ctrl.email})" title="Написать письмо">
+        <content class="Ip8zfc">
+          <div class="iYm0K"></div>
+        </content>
+      </div>
+    </div>
+    <div class="col-sm-1 pull-right"><logout></logout></div>
+    <div class="col-sm-12">
+      <button class="btn btn-default" ng-click="$ctrl.deleteMarked();" title="Удалить отмеченные">
+        <span class="glyphicon glyphicon-trash"></span>
+      </button>
+      <button class="btn btn-danger" ui-sref="newletter({from: $ctrl.email})">
+        <span class="glyphicon glyphicon-pencil"></span>
+        <span>&nbsp;Написать письмо</span>
+      </button>
+    </div>
+  </header>
+  <!-- control-bar -->
+  <div class="mail row">
+    <!--div class="sidebar col-sm-2">
+      <button class="compose btn btn-danger">
+        Compose
+      </button>
+      <ul class="inbox-sections list-unstyled">
+        <li class="active">
+          Inbox (100)
+        </li>
+        <li>Sent Mail</li>
+        <li class="pending">
+          Drafts (7)
+        </li>
+        <li>All Mail</li>
+        <li class="pending">
+          Spam (1)
+        </li>
+      </ul>
+    </div-->
+    <!-- sidebar -->
+    <div class="inbox col-sm-12">
+      <ul class="list-unstyled" ng-repeat="letter in $ctrl.letters | filter:searchstr">
+    <letter letter="letter" delletter="$ctrl.deleteItem(item)">
+    </letter>          
+      </ul>
+    </div><!-- inbox -->
+  </div><!-- mail -->
+</div>

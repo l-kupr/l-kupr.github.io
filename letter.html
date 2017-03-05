@@ -1,0 +1,44 @@
+<li class="email-item row unread">
+  <div class="people col-sm-3">
+    <ul class="mail-icons list-inline pull-left">
+      <li>
+        <input type="checkbox" class="mail-select" ng-model="$ctrl.letter.checked">
+      </li>
+      <li>
+        <span class="glyphicon glyphicon-star-empty"></span>
+      </li>
+      <li>
+        <span class="poi glyphicon glyphicon-trash" title="Удалить письмо" ng-click="$ctrl.deleteItem({item: $ctrl.letter});"></span>
+      </li>
+    </ul>
+      <span class="people-names poi" ui-sref="letter({letterId: $ctrl.letter.id})">
+        {{$ctrl.letter.from}}
+      </span>
+  </div><!-- people -->
+  <span class="poi" ui-sref="letter({letterId: $ctrl.letter.id})">
+  <div class="message col-sm-6">
+    <div class="clipper">
+      <h3>{{$ctrl.letter.subject}}</h3>
+      :
+      <p>{{$ctrl.letter.content}}</p>
+    </div>
+  </div><!-- message -->
+  <div class="date col-sm-3 text-right">
+    <date>
+      <div class="col-sm-6">{{$ctrl.letter.received | date:"dd.MM.yyyy hh:mm:ss"}}</div>
+      <div class="col-sm-6">{{$ctrl.letter.received | datefilter}}</div>
+    </date>
+  </div><!-- date -->  
+  </span>            
+    	<!--span ui-sref="letter({letterId: $ctrl.letter.id})" class="people-names" style="cursor:pointer">
+      <div class="col-sm-3">{{$ctrl.letter.from}}</div>
+      <div class="col-sm-6">{{$ctrl.letter.subject}}</div>
+      <div class="col-sm-3">
+        {{$ctrl.letter.received | date:"dd.MM.yyyy hh:mm:ss"}}&nbsp;
+        {{$ctrl.letter.received | datefilter}}
+      </div>
+      </span-->
+    <!--button ng-click="$ctrl.deleteItem({item: $ctrl.letter});" class="btn btn-default btn-xs"></button-->
+
+  <!-- message -->
+</li>

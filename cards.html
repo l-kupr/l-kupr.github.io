@@ -1,0 +1,44 @@
+    <div class="container-fluid">
+    <header class="row">
+  <div class="logo col-sm-2">
+    <h5>Контакты</h5>
+  </div>
+  <div class="search-bar col-sm-5">
+    <div class="input-group">
+      <input class="form-control" placeholder="Поиск..." type="text" ng-model="searchstr">
+      <span class="input-group-btn">
+        <button class="btn btn-main">
+          <span class="glyphicon glyphicon-search"></span>
+        </button>
+      </span>
+    </div>
+    <span class="arrow caret"></span>
+  </div>
+
+  <div class="col-sm-3">
+      <!--button ng-click="$ctrl.deleteMarked()" class="btn btn-default">
+        <span class="glyphicon glyphicon-remove"></span>
+        <span>Удалить отмеченное</span>
+      </button-->
+  </div>
+  <!-- profile --><!-- profile -->
+  <div class="col-sm-1">
+    <div role="button" class="XHsn7e" ui-sref="user({userId: ''})" title="Добавить контакт">
+        <content class="Ip8zfc">
+          <div class="iYm0K"></div>
+        </content>
+    </div>
+  </div>
+  <div class="col-sm-1"><logout></logout></div>
+</header>
+      <!-- control-bar -->
+      <div class="mail row">
+        <!-- sidebar -->
+        <div class="inbox col-sm-12">
+          <ul class="list-unstyled" ng-repeat="student in $ctrl.users | filter:searchstr">
+        <user-card user="student" delcard="$ctrl.deleteItem(item)">
+        </user-card>          
+          </ul>
+        </div><!-- inbox -->
+      </div><!-- mail -->
+    </div>
