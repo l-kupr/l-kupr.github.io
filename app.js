@@ -36,8 +36,7 @@ app.config(($stateProvider, $urlRouterProvider, $httpProvider) => {
       parent: 'common',
       url: '/letters/:email',
       resolve: {
-        letters: (MailboxesService,$stateParams) => MailboxesService.getLetters($stateParams.email),
-        email: MailboxesService => MailboxesService.getCurrentMailbox()
+        letters: (MailboxesService,$stateParams) => MailboxesService.getLetters($stateParams.email)
       },
       template: '<letters letters="letters" email="email">Идет загрузка ...</letters>',
       controller: function($scope, $stateParams, letters) {

@@ -55,40 +55,45 @@
       contacts: '<'
     },
     controller: function($scope, $timeout, $state, MailboxesService, UsersList) {
-      console.log('newletter');
-      console.log($state.params.from);
-      
       this.letter = {};
       this.letter.from = $state.params.from;
-      console.log(this);
-
-/*      UsersList.getUsers().then(result => {
-        this.contacts = result;
-      });*/
-      var $listContainer = angular.element(document.querySelectorAll('.search-item-list')[0] );
-      console.log($listContainer);
-      var el = angular.element(document.querySelectorAll('.input-email')[0]);
-      console.log(el);
-      el.on('focus',function(){
-          $listContainer.addClass('show');
-      });
-      el.on('blur',function(){
-          $timeout(function(){ $listContainer.removeClass('show') }, 200);
-        });      
-      $scope.chooseItem = function( item ){
-         $scope.search = item.email;
-           $listContainer.removeClass('show');
-       }
-
-      this.getContact = () => {
-        this.letter.to = $scope.selected.email};
-
       this.go = () => {
-        $state.go('letters', {email: $scope.$ctrl.letter.from}, { reload: 'letters' })
+        $state.go('letters', {email: this.letter.from}, { reload: 'letters' })
       };
-      $scope.submitForm = function() {
-        $scope.$ctrl.letter.from = $state.params.from;
+      var $listContainer = angular.element(document.querySelectorAll('.search-item-list')[0] );
+      var el = angular.element(document.querySelectorAll('.input-email')[0]);
+      el.on('keyup',() => {
+          $timeout(() => {$listContainer.addClass('show')}, 200);
+      });
+      el.on('blur',() => {
+          $timeout(() => { $listContainer.removeClass('show') }, 200);
+        });      
+      this.chooseItem = ( item ) => {
+        this.search = item.email;
+        this.letter.to = item.email;
+        $listContainer.removeClass('show');
+      }
+      this.change = () => {
+        this.letter.to = this.search;
+      };
+      $scope.submitForm = () => {
+        //this.letter.from = $state.params.from;
+        //this.letter.to = $scope.search;
+        console.log(this);
         if ($scope.letterForm.$valid) {
+          let condition = (item, index, array) => {
+            let result = false;
+            if (item.email === this.letter.to) {result = true;}
+            return result;
+          };
+          let exists = this.contacts.some(condition);
+          console.log(exists);
+          if (!exists){
+            let user = {};
+            user.email = user.firstName = this.letter.to;
+            UsersList.saveUser(user);
+          }
+
           MailboxesService
             .sentLetter($scope.$ctrl.letter)
             .then(result => {alert("Письмо отправлено"); $scope.$ctrl.go()}, error => {alert(error.message);$scope.$ctrl.go()});

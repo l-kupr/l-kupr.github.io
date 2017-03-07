@@ -71,7 +71,7 @@ app.service('AuthService', function ($localStorage, $q) {
         user.id = maxId;
         users.push(user);
       }
-    }; 
+    };
     this.deleteUser = item => {
       users.splice(users.indexOf(item), 1);
     };
@@ -98,11 +98,12 @@ app.service('AuthService', function ($localStorage, $q) {
       };
       if (letters) {
         currentMailboxLetters = letters.filter(condition);
+        currentMailbox = email;
         return $q.resolve(currentMailboxLetters);
       }
       return $http.get('letters.json', {transformResponse: function(data){
           data = JSON.parse(data);
-          for (let i = 0; i < data.length; i++) data[i].id = i;
+          for (var i = 0; i < data.length; i++) data[i].id = i;
           maxId = data.length;
           //console.log(res);
           return data;
@@ -126,6 +127,7 @@ app.service('AuthService', function ($localStorage, $q) {
     }
     this.deleteLetter = item => {
       letters.splice(letters.indexOf(item), 1);
+      currentMailboxLetters.splice(currentMailboxLetters.indexOf(item), 1);
     };
     this.sentLetter = (letter) => {
       let request = $q.defer();
@@ -134,6 +136,7 @@ app.service('AuthService', function ($localStorage, $q) {
         letter.id = maxId;
         maxId = maxId + 1;
         letter.received = Date.now();
+        currentMailboxLetters.unshift(letter);
         if (letters.unshift(letter) > 0) {console.log(letters); request.resolve(true);}
         else request.reject(new Error("Ошибка при отправке сообщения")); 
          }, 100);

@@ -8,37 +8,28 @@
           <div class="panel-body">
             <form name="letterForm" ng-submit="submitForm()" novalidate>
               <div class="row">
-                <!--div class="col-sm-12">
-                  <div class="form-group" ng-class="{ 'has-error' : letterForm.to.$invalid && !letterForm.to.$pristine }">
-                    <label>Кому</label>
-                    <input type="email" name="to" class="form-control"  ng-model="$ctrl.letter.to" required>
-                    <p ng-show="letterForm.to.$invalid && !letterForm.to.$pristine" class="help-block">Неверный формат Email</p>
-                  </div>
-                </div-->
                 <div class="col-sm-12">
                   <div class="form-group" ng-class="{ 'has-error' : letterForm.to.$invalid && !letterForm.to.$pristine }">
                     <label>Кому</label>
-                    <input type="email" name="to" class="form-control input-email"  ng-model="search" required>
+
+                    <input type="text" name="search" class="form-control input-email" ng-model="$ctrl.search" ng-change="$ctrl.change()" required>
+
+                    <input type="email" name="to" class="form-control input-email" ng-model="$ctrl.letter.to" ng-hide="true" required >
+
                     <div class="search-item-list">
                       <ul class="list">
-                        <li ng-repeat="c in $ctrl.contacts | filter:search" ng-click="chooseItem(c)"><span>{{c.email}}</span></li>
+                        <li ng-repeat="c in $ctrl.contacts | orderBy:'email' | filter:$ctrl.search | limitTo:7" ng-click="$ctrl.chooseItem(c)"><span>{{c.email}}</span></li>
                       </ul>
                     </div>
-                    <p ng-show="letterForm.to.$invalid && !letterForm.to.$pristine" class="help-block">Неверный формат Email</p>
+                    <p ng-show="letterForm.to.$invalid && !letterForm.search.$pristine" class="help-block">Неверный формат Email</p>
                   </div>
                 </div>
-                <!--div class="col-sm-12">
-                  <div class="form-group" ng-class="{ 'has-error' : letterForm.to.$invalid && !letterForm.to.$pristine }">
-                    <label>Кому</label>
-                    <select type="email" class="form-control" ng-options="c.email for c in $ctrl.contacts" ng-change="$ctrl.getContact();" ng-model="selected" required></select>
 
-                  </div>
-                </div-->
                 <div class="col-sm-12">
                   <div class="form-group" ng-class="{ 'has-error' : letterForm.subject.$invalid && !letterForm.subject.$pristine }">
                     <label>Тема письма</label>
                     <input type="text" name="subject" class="form-control" ng-model="$ctrl.letter.subject" maxlength="30" required>
-                    <p ng-show="letterForm.subject.$invalid && !letterForm.subject.$pristine" class="help-block">Необходимо задать тему письма</p>
+                    <p ng-show="letterForm.subject.$invalid && (!letterForm.subject.$pristine || !letterForm.content.$pristine)" class="help-block">Необходимо задать тему письма</p>
                   </div>
                 </div>
               </div>
