@@ -54,7 +54,7 @@
       from: '<',
       contacts: '<'
     },
-    controller: function($scope, $timeout, $state, MailboxesService, UsersList) {
+    controller: function($timeout, $state, MailboxesService, UsersList) {
       this.letter = {};
       this.letter.from = $state.params.from;
       this.go = () => {
@@ -76,11 +76,10 @@
       this.change = () => {
         this.letter.to = this.search;
       };
-      $scope.submitForm = () => {
+      this.submitForm = () => {
         //this.letter.from = $state.params.from;
-        //this.letter.to = $scope.search;
         console.log(this);
-        if ($scope.letterForm.$valid) {
+        if (this.letterForm.$valid) {
           let condition = (item, index, array) => {
             let result = false;
             if (item.email === this.letter.to) {result = true;}
@@ -95,9 +94,9 @@
           }
 
           MailboxesService
-            .sentLetter($scope.$ctrl.letter)
-            .then(result => {alert("Письмо отправлено"); $scope.$ctrl.go()}, error => {alert(error.message);$scope.$ctrl.go()});
-          console.log($scope.$ctrl.letter);          
+            .sentLetter(this.letter)
+            .then(result => {alert("Письмо отправлено"); this.go()}, error => {alert(error.message);this.go()});
+          console.log(this.letter);          
         }
       };
     }
@@ -149,9 +148,8 @@
       letter: '<',
       email:'<'
     },
-    controller: function($scope, $state, MailboxesService) {
-      $scope.email = MailboxesService.getCurrentMailbox();
-      console.log($scope);
+    controller: function($state, MailboxesService) {
+      this.email = MailboxesService.getCurrentMailbox();
       this.out = () => {$state.go('letters', {email: MailboxesService.getCurrentMailbox()})};
       this.delete = (letter) => {
         MailboxesService.deleteLetter(letter);
@@ -164,14 +162,14 @@
       user: '<'
     },
     templateUrl: 'card.html',
-    controller: function($scope, $state, UsersList) {
+    controller: function($state, UsersList) {
       this.saveItem = (item) => {
         UsersList.saveUser(item);
         $state.go('cards', null, { reload: 'cards' })
       };
-      $scope.submitForm = function() {
-            if ($scope.userForm.$valid) {
-                UsersList.saveUser($scope.$ctrl.user);
+      this.submitForm = () => {
+            if (this.userForm.$valid) {
+                UsersList.saveUser(this.user);
                 $state.go('cards', null, { reload: 'cards' })
             }
         };
