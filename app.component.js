@@ -168,6 +168,7 @@
         $state.go('cards', null, { reload: 'cards' })
       };
       this.submitForm = () => {
+        console.log(this);
             if (this.userForm.$valid) {
                 UsersList.saveUser(this.user);
                 $state.go('cards', null, { reload: 'cards' })

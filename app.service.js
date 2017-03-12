@@ -1,4 +1,10 @@
 'use strict'
+app.service('Calc', function() {
+  this.sum = (a, b) => a + b;
+});
+
+
+
 app.service('AuthService', function ($localStorage, $q) {
     let creds = {l: 'admin', p: '123'};
     // если пользователь авторизован, в $localStorage.auth хранится 1
@@ -67,6 +73,7 @@ app.service('AuthService', function ($localStorage, $q) {
             break;
           }
       } else {
+        if (!users) users = [];
         maxId = maxId + 1;
         user.id = maxId;
         users.push(user);
